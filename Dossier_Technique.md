@@ -1,44 +1,93 @@
 # Plan du Dossier Technique : Projet Comprym
 
-Ce document servira de base (brouillon) pour le document Google Docs final. Voici le plan détaillé de notre dossier technique, couvrant toutes les étapes de l'ingénierie du compresseur.
+*(Ce fichier sert de brouillon et de trame pour le document final Google Docs).*
+
+## Introduction
+*(À rédiger : Présentation de l'ambition du projet, créer un compresseur 3D haute performance avec du matériel accessible).*
+
+## Sommaire
+*(Généré automatiquement à la fin)*
 
 ---
 
-## 1. Introduction
-*   **1.1. Contexte du projet** : Création d'un compresseur imprimé en 3D autour d'un moteur standard de modélisme.
-*   **1.2. Objectifs** : Atteindre un taux de compression maximal avec les moyens de fabrication additive disponibles.
-*   **1.3. Indicateurs de réussite** : Pression statique cible, rendement, intégrité mécanique.
+## 1. Cahier des charges
 
-## 2. Cahier des charges et Contraintes
-*   **2.1. Contraintes motrices** : Spécifications du moteur brushless A2212 (900 KV, ~150W) et de l'alimentation (LiPo 3S 11.1V).
-*   **2.2. Contraintes de fabrication** : Capacités et limites de l'impression 3D FDM (PLA/TPU) et SLA (Résine). Tolérances dimensionnelles.
-*   **2.3. Contraintes opérationnelles** : Résistance thermique (échauffement lié à la compression) et résistance mécanique (force centrifuge à ~10 000 tr/min).
+### 1.1. Contexte
+*(À rédiger : Pourquoi ce projet ? Cadre amateur/étudiant/personnel, volonté de repousser les limites de l'impression 3D, etc.)*
 
-## 3. Étude et Conception Préliminaire
-*   **3.1. Analyse des architectures possibles** : Comparatif (Centrifuge, Axial, Volumétrique).
-*   **3.2. Justification du choix architectural** : Explication du choix de l'**architecture axiale multi-étages** (adaptation aux 10 000 tr/min, viabilité en impression 3D, addition des taux de compression).
+### 1.2. Cahier des charges
+*   **Moteur imposé :** Brushless Outrunner A2212 (900 KV).
+*   **Alimentation :** Batterie LiPo 3S (11.1 V) - Vitesse max ~ 10 000 tr/min.
+*   **Contraintes de fabrication :** Utilisation exclusive de l'impression 3D pour la mécanique fluide (SLA/Résine pour l'aérodynamisme et la précision, FDM/PLA/TPU pour la structure et l'étanchéité).
+*   **Objectif principal :** Obtenir le taux de compression le plus élevé possible avec ce seul moteur.
+*   **Sécurité :** Prévention de l'éclatement des pièces tournantes.
 
-## 4. Dimensionnement Thermodynamique et Aérodynamique
-*   **4.1. Théorie d'Euler pour les turbomachines** : Définition de l'échange d'énergie entre le fluide et le rotor.
-*   **4.2. Calcul des triangles de vitesse** : Modélisation des vecteurs vitesse (absolue, relative, d'entraînement) en entrée et sortie de rotor/stator.
-*   **4.3. Détermination des paramètres aérodynamiques** : Angles des pales, section de passage, et estimation du nombre d'étages requis pour la pression cible.
+---
 
-## 5. Conception Mécanique Détaillée (CAO)
-*   **5.1. Dimensionnement du moyeu, du rotor et du carter (stator)**.
-*   **5.2. Tolérances et jeux de fonctionnement** : Définition des jeux entre les pales tournantes et le carter pour limiter les fuites sans frottement.
-*   **5.3. Intégration électromécanique** : Montage du moteur A2212, accouplement sur l'axe, gestion des efforts axiaux (roulements supplémentaires).
-*   **5.4. Système d'étanchéité** : Utilisation du TPU pour les joints statiques.
+## 2. Étude Préliminaire et Architecture
 
-## 6. Fabrication Additive
-*   **6.1. Choix finaux des matériaux** : Répartition des pièces entre Résine (profils aéro) et PLA (structure).
-*   **6.2. Paramètres d'impression** : Orientation des pièces (pour contrer le délaminage sous force centrifuge), densité de remplissage, gestion des supports.
-*   **6.3. Post-traitement** : Nettoyage, lissage, équilibrage dynamique du rotor, et assemblage final.
+### 2.1. Analyse des architectures possibles
+*(Explication des raisons qui ont poussé à éliminer les compresseurs volumétriques (frottements/étanchéité FDM) et les compresseurs centrifuges mono-étagés (vitesse de 10 000 tr/min trop faible pour générer une bonne pression).*
 
-## 7. Protocole d'Essai et Validation
-*   **7.1. Présentation du banc d'essai** : Instrumentation (Manomètre, anémomètre/débitmètre, sonde de température), procédure de test en sécurité.
-*   **7.2. Résultats expérimentaux** : Relevés de pression à débit nul, relevés de débit, courbes caractéristiques, et suivi thermique.
-*   **7.3. Analyse critique** : Comparaison entre les résultats théoriques (Partie 4) et pratiques. Identification des sources de pertes (fuites, frottements fluides).
+### 2.2. Choix de l'architecture : Compresseur Axial Multi-étages
+*(Justification du choix : capacité à additionner les taux de compression à chaque étage, excellente synergie avec la précision de l'impression SLA pour les pales, forme tubulaire adaptée au moteur).*
 
-## 8. Conclusion et Perspectives
-*   **8.1. Bilan du projet** : Atteinte des objectifs initiaux.
-*   **8.2. Pistes d'amélioration (Version 2)** : Optimisations aérodynamiques, autres moteurs, autres matériaux.
+---
+
+## 3. Modélisation Thermodynamique et Aérodynamique
+
+### 3.1. Théorie et Équations d'Euler
+*(Rappels des équations des turbomachines, triangles des vitesses).*
+
+### 3.2. Dimensionnement préliminaire
+*(Calcul de l'angle des pales, de la vitesse d'écoulement, estimation du nombre d'étages requis pour maximiser la puissance de 150W du moteur).*
+
+### 3.3. Sélection des profils aérodynamiques
+*(Choix des profils NACA pour le rotor et le stator).*
+
+---
+
+## 4. Conception Mécanique (CAO)
+
+### 4.1. Modélisation du Rotor et du Stator
+*(Conception des disques, moyeux et ailettes, respect des tolérances radiales d'impression).*
+
+### 4.2. Intégration du Moteur A2212
+*(Conception de l'accouplement moteur-rotor, gestion de l'alignement).*
+
+### 4.3. Carter et Étanchéité
+*(Assemblage de la coque externe, utilisation de joints TPU).*
+
+### 4.4. Analyse des Contraintes Mécaniques
+*(Validation de la résistance à la force centrifuge des pales en résine à 10 000 tr/min).*
+
+---
+
+## 5. Fabrication Additive
+
+### 5.1. Matériaux retenus et Paramètres de tranchage
+*(SLA pour les aubages, PLA pour le carter, réglages d'impression, orientation pour éviter la rupture par clivage).*
+
+### 5.2. Post-traitement et Assemblage
+*(Nettoyage de la résine, ajustements, équilibrage dynamique du rotor).*
+
+---
+
+## 6. Banc d'Essai et Validation Expérimentale
+
+### 6.1. Protocole de Test et Sécurité
+*(Mise en place d'un variateur (ESC), mesure du courant, protections physiques).*
+
+### 6.2. Résultats : Débit, Pression et Échauffement
+*(Tableaux et graphiques de relevés expérimentaux au manomètre).*
+
+### 6.3. Confrontation Théorie / Pratique
+*(Analyse des écarts, rendement global estimé, fuites, pertes aérodynamiques).*
+
+---
+
+## Conclusion
+*(Bilan du projet, atteinte des objectifs, limites du plastique, pistes d'amélioration pour une V2).*
+
+## Annexes
+*(Datasheet moteur, scripts de calcul, plans de détail).*
